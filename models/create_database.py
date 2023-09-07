@@ -1,10 +1,14 @@
-temp_database = {
-    'admin': hash('1234'),
-    'user': hash('qwerty'),
-}
+from models.database import create_db, Session
+from models.user import User
+
+
+def create_database():
+    create_db()
 
 
 def check_user(username: str, password: str) -> bool:
+    return
+
     if username in temp_database.keys():
         password_hash = hash(password)
 
@@ -18,5 +22,14 @@ def check_user(username: str, password: str) -> bool:
 
 
 def create_user(username: str, password: str) -> None:
-    temp_database[username] = hash(password)
+    session = Session()
+
+    user = User(name=username, password_hash=hash(password))
+    session.add(user)
+
+    session.commit()
+    session.close()
+
     print('User created successfully')
+
+

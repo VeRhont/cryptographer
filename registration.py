@@ -1,6 +1,6 @@
-from main import main
+from main_window import main
 from tkinter import messagebox, Tk
-from database import check_user, create_user
+from models.create_database import check_user, create_user
 
 
 def register(username: str, password: str):
