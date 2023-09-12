@@ -12,7 +12,7 @@ def main():
     if not db_is_created:
         db_creator.create_database()
 
-    # register_form()
+    register_form()
 
 
 if __name__ == '__main__':

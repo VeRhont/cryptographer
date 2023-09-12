@@ -7,17 +7,15 @@ def create_database():
 
 
 def check_user(username: str, password: str) -> bool:
-    return
+    session = Session()
+    all_users = session.query(User)
+    session.close()
 
-    if username in temp_database.keys():
-        password_hash = hash(password)
+    for user in all_users:
+        print(password, hash(password), user.password_hash)
+        # if hash(password) == user.password_hash:
+        #     return True
 
-        if temp_database[username] == password_hash:
-            print('Welcome')
-            return True
-
-    print(temp_database)
-    print('Error')
     return False
 
 
@@ -31,5 +29,3 @@ def create_user(username: str, password: str) -> None:
     session.close()
 
     print('User created successfully')
-
-

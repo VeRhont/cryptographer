@@ -22,24 +22,23 @@ def register_form():
     form.pack(padx=100, pady=120)
 
     username = StringVar()
-    username_label = Label(form, text='Username', bg='#061733', fg='#eef', font=32).grid(row=0, column=0, sticky=W, padx=10,
-                                                                                         pady=5)
-    username_entry = Entry(form, textvariable=username, bg='#0270B8', fg='#eef').grid(row=0, column=1, padx=10, pady=10)
+    Label(form, text='Username', bg='#061733', fg='#eef', font=32).grid(row=0, column=0, sticky=W, padx=10,
+                                                                        pady=5)
+    Entry(form, textvariable=username, bg='#0270B8', fg='#eef').grid(row=0, column=1, padx=10, pady=10)
 
     password = StringVar()
-    password_label = Label(form, text='Password', bg='#061733', fg='#eef', font=32).grid(row=1, column=0, sticky=W, padx=10,
-                                                                                         pady=5)
-    password_entry = Entry(form, textvariable=password, show='*', bg='#0270B8', fg='#eef').grid(row=1, column=1, padx=10,
-                                                                                                pady=10)
+    Label(form, text='Password', bg='#061733', fg='#eef', font=32).grid(row=1, column=0, sticky=W, padx=10,
+                                                                        pady=5)
+    Entry(form, textvariable=password, show='*', bg='#0270B8', fg='#eef').grid(row=1, column=1, padx=10,
+                                                                               pady=10)
 
-    registration_button = Button(form, text='Register', bg='#1C84B8', fg='#061733',
-                                 command=lambda: register(username.get(), password.get())).grid(row=2, column=0, sticky=W,
-                                                                                                pady=25,
-                                                                                                padx=10)
-    enter_button = Button(form, text='Enter', bg='#1C84B8', fg='#061733',
-                          command=lambda: enter(username.get(), password.get(), root)).grid(
-        row=2, column=1, sticky=E, pady=25, padx=10)
-
+    Button(form, text='Register', bg='#1C84B8', fg='#061733',
+           command=lambda: register(username.get(), password.get())).grid(row=2, column=0,
+                                                                          sticky=W,
+                                                                          pady=25,
+                                                                          padx=10)
+    Button(form, text='Enter', bg='#1C84B8', fg='#061733',
+           command=lambda: enter(username.get(), password.get(), root)).grid(row=2, column=1, sticky=E, pady=25, padx=10)
 
     root.mainloop()
 

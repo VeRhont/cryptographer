@@ -1,10 +1,10 @@
 from tkinter import *
 
 
-def main():
+def create_main_window():
     root = Tk()
     root.mainloop()
 
 
 if __name__ == '__main__':
-    main()
+    create_main_window()
