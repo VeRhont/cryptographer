@@ -1,5 +1,6 @@
 from models.database import create_db, Session
 from models.user import User
+from hash_function import hashf
 
 
 def create_database():
@@ -12,9 +13,8 @@ def check_user(username: str, password: str) -> bool:
     session.close()
 
     for user in all_users:
-        print(password, hash(password), user.password_hash)
-        # if hash(password) == user.password_hash:
-        #     return True
+        if (username == user.name) and (hashf(password) == user.password_hash):
+            return True
 
     return False
 
@@ -22,7 +22,7 @@ def check_user(username: str, password: str) -> bool:
 def create_user(username: str, password: str) -> None:
     session = Session()
 
-    user = User(name=username, password_hash=hash(password))
+    user = User(name=username, password_hash=hashf(password))
     session.add(user)
 
     session.commit()
