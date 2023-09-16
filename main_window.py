@@ -7,8 +7,9 @@ from encrypt import encrypt, decrypt
 
 def open_file():
     filename = filedialog.askopenfilename(initialdir='C:',
-                                      title='Select image',
-                                      filetypes=(('JPG files', '*.jpg'), ('PNG files', '*.png'), ('All files', '*.*')))
+                                          title='Select image',
+                                          filetypes=(
+                                              ('JPG files', '*.jpg'), ('PNG files', '*.png'), ('All files', '*.*')))
 
     return filename
 
@@ -26,6 +27,36 @@ def decrypt_image():
     return message
 
 
+def create_encrypt_ui():
+    pass
+
+
+def create_decrypt_ui(root, form):
+    try:
+        form.destroy()
+        message = decrypt_image()
+    except:
+        message = 'No secret message'
+
+    def update_form():
+        root.destroy()
+        create_main_window()
+
+    label = Label(root, text='\n'.join(i for i in message.split())).pack(pady=20, padx=20)
+    back = Button(root, text='BACK', bg='#1C84B8', fg='#061733', font=10, command=update_form).pack(pady=30, padx=20)
+
+
+def create_main_ui(root):
+    form = Frame(root, width=500, height=300, bg='#061733', relief=SUNKEN, padx=20, pady=20)
+    form.pack(padx=300, pady=180)
+
+    Label(form, text='Choose option:', bg='#061733', fg='#eef', font=32).pack(padx=20, pady=20)
+    Button(form, text='ENCRYPT', bg='#1C84B8', fg='#061733', font=10, command=lambda: create_encrypt_ui(form)).pack(
+        padx=100, pady=10)
+    Button(form, text='DECRYPT', bg='#1C84B8', fg='#061733', font=10,
+           command=lambda: create_decrypt_ui(root, form)).pack(padx=100, pady=10)
+
+
 def create_main_window():
     root = Tk()
     root.title('Cryptographer')
@@ -36,11 +67,10 @@ def create_main_window():
     background_image = ImageTk.PhotoImage(Image.open('static/images/background1.jpg'))
     Label(root, image=background_image).place(x=-2, y=0)
 
-
+    create_main_ui(root)
 
     root.mainloop()
 
 
 if __name__ == '__main__':
     create_main_window()
-
