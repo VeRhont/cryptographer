@@ -14,10 +14,12 @@ def open_file():
     return filename
 
 
-def encrypt_image(message):
+def encrypt_image(root, message):
     filename = open_file()
-
     encrypt(filename, message)
+
+    root.destroy()
+    create_main_window()
 
 
 def decrypt_image():
@@ -27,8 +29,16 @@ def decrypt_image():
     return message
 
 
-def create_encrypt_ui():
-    pass
+def create_encrypt_ui(root, form):
+    form.destroy()
+
+    label = Label(root, text='Enter message you want to encrypt:', bg='#061733', fg='#eef', font=32)
+    entry = Entry(root, width=100)
+    button = Button(root, text='Choose file', bg='#1C84B8', fg='#061733', font=10, command=lambda: encrypt_image(root, entry.get()))
+
+    label.pack(padx=20, pady=20)
+    entry.pack(padx=20, pady=10)
+    button.pack(padx=40, pady=40)
 
 
 def create_decrypt_ui(root, form):
@@ -51,7 +61,7 @@ def create_main_ui(root):
     form.pack(padx=300, pady=180)
 
     Label(form, text='Choose option:', bg='#061733', fg='#eef', font=32).pack(padx=20, pady=20)
-    Button(form, text='ENCRYPT', bg='#1C84B8', fg='#061733', font=10, command=lambda: create_encrypt_ui(form)).pack(
+    Button(form, text='ENCRYPT', bg='#1C84B8', fg='#061733', font=10, command=lambda: create_encrypt_ui(root, form)).pack(
         padx=100, pady=10)
     Button(form, text='DECRYPT', bg='#1C84B8', fg='#061733', font=10,
            command=lambda: create_decrypt_ui(root, form)).pack(padx=100, pady=10)
